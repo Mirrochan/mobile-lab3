@@ -23,15 +23,12 @@ class Student {
         if (isAdult) "Adult" else "Minor"
     }
 
-    // Первинний конструктор
     constructor(name: String, age: Int, grades: List<Int>) {
         this._name = name.trim().replaceFirstChar { it.uppercase() }
         this._age = if (age >= 0) age else 0
         this._grades = grades
         println("Student object created with full constructor: $_name")
     }
-
-    // Вторинний конструктор
     constructor(name: String) {
         this._name =  name.trim().replaceFirstChar { it.uppercase() }
         this._age =0
@@ -53,10 +50,6 @@ class Student {
 
     fun getGrades(): List<Int> = _grades
 
-    override fun toString(): String {
-        return "Student(name=$_name, age=$_age, grades=$_grades, avg=${"%.2f".format(getAverage())}, status=$status)"
-    }
-
     operator fun plus(other: Student): Student {
         return Student(name = "$name & ${other.name}", age = maxOf(age, other.age), grades = _grades + other._grades)
     }
@@ -69,7 +62,7 @@ class Student {
         if (other !is Student) return false
         return this.name == other.name && this.getAverage() == other.getAverage()
     }
-    override fun hashCode(): Int {
-        return name.hashCode() + getAverage().hashCode().toInt()
+    override fun toString(): String {
+        return "Student(name='$name', age=$age, grades=$_grades)"
     }
 }
